@@ -21,7 +21,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ffmpeg-tool.exe
+          name: ffmpeg-tool
           path: /Users/runner/work/ffmpeg-tool/ffmpeg-tool/build/native/nativeCompile/ffmpeg-tool
       - name: Create Release and Upload Release Asset
         uses: softprops/action-gh-release@v1
