@@ -1,5 +1,5 @@
 on:
- page_build
+ workflow_dispatch
 jobs:
   my_job:
     name: deploy to staging
