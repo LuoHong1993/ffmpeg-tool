@@ -22,7 +22,7 @@ jobs:
           name: ffmpeg-tool
           path: D:\a\ffmpeg-tool\ffmpeg-tool\build\native\nativeCompile\ffmpeg-tool.exe
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         with:
-         files: ${{github.workspace}}/build/native/nativeCompile/ffmpeg-tool.exe
+         files: ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
          tag_name: 0.0.1
