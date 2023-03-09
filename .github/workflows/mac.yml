@@ -1,7 +1,5 @@
 on:
-  push:
-    branches:
-    - master
+ page_build
 jobs:
   my_job:
     name: deploy to staging
