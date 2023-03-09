@@ -6,9 +6,12 @@ plugins {
 }
 
 group = 'tech.iboot'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '17'
 
+bootJar {
+    archiveBaseName = 'ffmpeg-tool'
+}
 allprojects {
     repositories {
         maven {
