@@ -21,7 +21,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Windows Execute Gradle build
         if: matrix.os == 'windows-latest'
-        run: ./gradlew nativeCompile
+        run: |
+         ./gradlew bootJar
+         ./gradlew nativeCompile
       - name: Execute Gradle build
         if: matrix.os != 'windows-latest'
         run: |
@@ -39,5 +41,5 @@ jobs:
         if: matrix.os != 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
         with:
-         files: ${{github.workspace}}/build/native/nativeCompile/**
+         files: ${{github.workspace}}/build/native/nativeCompile/ffmpeg-tool
          tag_name: ${{env.varsion_name}}
