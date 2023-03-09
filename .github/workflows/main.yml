@@ -1,9 +1,12 @@
 on:
   workflow_dispatch
 jobs:
-  my_job:
-    name: deploy to staging
-    runs-on: windows-latest
+  build_job:
+    name: build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - uses: actions/checkout@v3
       - uses: graalvm/setup-graalvm@v1
@@ -16,13 +19,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Execute Gradle build
         run: ./gradlew nativeCompile
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ffmpeg-tool
-          path: D:\a\ffmpeg-tool\ffmpeg-tool\build\native\nativeCompile\ffmpeg-tool.exe
       - name: Release
         uses: softprops/action-gh-release@v0.1.13
         with:
-         files: ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
+         files: ${{github.workspace}}/build/native/nativeCompile/ffmpeg-tool/**
          tag_name: 0.0.1
