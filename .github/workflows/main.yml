@@ -21,10 +21,7 @@ jobs:
         with:
           name: ffmpeg-tool
           path: D:\a\ffmpeg-tool\ffmpeg-tool\build\native\nativeCompile\ffmpeg-tool.exe
-      - name: Create Release and Upload Release Asset
+      - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
          files: D:\a\ffmpeg-tool\ffmpeg-tool\build\native\nativeCompile\ffmpeg-tool.exe
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
