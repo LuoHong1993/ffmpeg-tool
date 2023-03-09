@@ -33,8 +33,8 @@ jobs:
         with:
          files: |
           ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
-          ${{github.workspace}}\build\lib\ffmpeg-tool-${{env.varsion_name}}.jar
-         tag_name: 0.0.1
+          ${{github.workspace}}\build\libs\ffmpeg-tool-${{env.varsion_name}}.jar
+         tag_name: ${{env.varsion_name}}
       - name: Release
         if: matrix.os != 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
