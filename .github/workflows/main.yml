@@ -25,3 +25,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
          files: D:\a\ffmpeg-tool\ffmpeg-tool\build\native\nativeCompile\ffmpeg-tool.exe
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
