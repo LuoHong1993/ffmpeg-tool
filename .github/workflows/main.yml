@@ -24,5 +24,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-         files: ${{github.workspace}}/a/ffmpeg-tool/ffmpeg-tool/build/native/nativeCompile/ffmpeg-tool.exe
+         files: ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
          tag_name: 0.0.1
