@@ -1,12 +1,14 @@
 on:
   workflow_dispatch
+env:
+  versions: 0.0.1
 jobs:
   build_job:
     name: build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v3
       - uses: graalvm/setup-graalvm@v1
@@ -29,11 +31,13 @@ jobs:
         if: matrix.os == 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
         with:
-         files: ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool\ffmpeg-tool.exe
+         files: |
+          ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
+          ${{github.workspace}}\build\lib\ffmpeg-tool-${{versions}}.jar
          tag_name: 0.0.1
       - name: Release
         if: matrix.os != 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
         with:
-         files: ${{github.workspace}}/build/native/nativeCompile/ffmpeg-tool/**
-         tag_name: 0.0.1
+         files: ${{github.workspace}}/build/native/nativeCompile/**
+         tag_name: ${{versions}}
