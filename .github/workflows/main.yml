@@ -17,9 +17,22 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Execute Gradle build
+      - name: Windows Execute Gradle build
+        if: matrix.os == 'windows-latest'
         run: ./gradlew nativeCompile
+      - name: Execute Gradle build
+        if: matrix.os != 'windows-latest'
+        run: |
+         chmod +x gradlew
+         ./gradlew nativeCompile
+      - name: Windows Release
+        if: matrix.os == 'windows-latest'
+        uses: softprops/action-gh-release@v0.1.13
+        with:
+         files: ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool\ffmpeg-tool.exe
+         tag_name: 0.0.1
       - name: Release
+        if: matrix.os != 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
         with:
          files: ${{github.workspace}}/build/native/nativeCompile/ffmpeg-tool/**
