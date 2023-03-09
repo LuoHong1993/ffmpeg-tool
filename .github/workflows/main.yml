@@ -1,7 +1,7 @@
 on:
   workflow_dispatch
 env:
-  versions: 0.0.1
+  varsion_name: 0.0.1
 jobs:
   build_job:
     name: build on ${{ matrix.os }}
@@ -33,11 +33,11 @@ jobs:
         with:
          files: |
           ${{github.workspace}}\build\native\nativeCompile\ffmpeg-tool.exe
-          ${{github.workspace}}\build\lib\ffmpeg-tool-${{versions}}.jar
+          ${{github.workspace}}\build\lib\ffmpeg-tool-${{varsion_name}}.jar
          tag_name: 0.0.1
       - name: Release
         if: matrix.os != 'windows-latest'
         uses: softprops/action-gh-release@v0.1.13
         with:
          files: ${{github.workspace}}/build/native/nativeCompile/**
-         tag_name: ${{versions}}
+         tag_name: ${{varsion_name}}
